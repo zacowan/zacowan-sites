@@ -160,7 +160,7 @@ const Home: NextPage = () => {
                 />
               </svg>
             </span>{" "}
-            with{" "}
+            using{" "}
             <a
               className="font-semibold hover:text-black transition-colors"
               href="https://nextjs.org/"
