@@ -61,7 +61,7 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
         }
         alt
       >
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 py-20 px-4">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-4 py-20 px-4 justify-items-center">
           <ExperienceDataCol
             label={numeral(commitsInfo.totalCount!).format("0,0")}
             desc={

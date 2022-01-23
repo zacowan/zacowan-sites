@@ -8,7 +8,7 @@ type Props = {
 
 const ExperienceDataCol: FC<Props> = ({ label, desc, timestamp }) => {
   return (
-    <div className="p-8 bg-white rounded-lg shadow-lg transition-shadow hover:shadow-xl">
+    <div className="p-8 bg-white rounded-lg shadow-lg transition-shadow hover:shadow-xl max-w-lg">
       <h3 className="text-8xl pb-4 font-extrabold text-center text-indigo-500 block tabular-nums">
         {label}
       </h3>
