@@ -1,9 +1,10 @@
 import type { NextPage } from "next";
 import numeral from "numeral";
 import moment from "moment";
-import getTotalCommits, {
-  Data as TotalCommitsType,
-} from "../utils/get-total-commits";
+import getCommitsInfo, { Data as CommitsInfo } from "../utils/get-commits-info";
+import getRepositoriesInfo, {
+  Data as RepositoriesInfo,
+} from "../utils/get-repositories-info";
 import ExperienceDataCol from "../components/ExperienceDataCol";
 import ContentSection from "../components/ContentSection";
 
@@ -11,10 +12,11 @@ const LINKEDIN_LINK = "https://www.linkedin.com/in/zacowan/";
 const GITHUB_LINK = "https://github.com/zacowan";
 
 type Props = {
-  totalCommits: TotalCommitsType;
+  commitsInfo: CommitsInfo;
+  repositoriesInfo: RepositoriesInfo;
 };
 
-const Home: NextPage<Props> = ({ totalCommits }) => {
+const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
   return (
     <div className="scroll-smooth divide-y">
       {/* Hero */}
@@ -61,26 +63,51 @@ const Home: NextPage<Props> = ({ totalCommits }) => {
       >
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 py-20 px-4">
           <ExperienceDataCol
-            label={numeral(totalCommits.totalCount!).format("0,0")}
+            label={numeral(commitsInfo.totalCount!).format("0,0")}
             desc={
               <span>
-                Total commits written over{" "}
+                total commits written over{" "}
                 <span className="underline decoration-fuchsia-500 decoration-2">
-                  {numeral(totalCommits.timeWeeks!).format("0,0")} weeks
+                  {numeral(commitsInfo.timeWeeks!).format("0,0")} weeks
                 </span>{" "}
                 of coding on personal GitHub repositories. An average of{" "}
                 <span className="underline decoration-fuchsia-500 decoration-2">
-                  {numeral(totalCommits.averageOverWeeks!).format("0.0")}{" "}
-                  commits
+                  {numeral(commitsInfo.averageOverWeeks!).format("0.0")} commits
                 </span>{" "}
                 done per week over the past{" "}
                 <span className="underline decoration-fuchsia-500 decoration-2">
-                  {numeral(totalCommits.timeYears!).format("0,0")} years
+                  {numeral(commitsInfo.timeYears!).format("0,0")} years
                 </span>{" "}
                 .
               </span>
             }
-            timestamp={moment(totalCommits.timestamp!).fromNow()}
+            timestamp={moment(commitsInfo.timestamp!).fromNow()}
+          />
+          <ExperienceDataCol
+            label={numeral(repositoriesInfo.spaceBytes!).format("0,0a")}
+            desc={
+              <span>
+                bytes of code written across{" "}
+                <span className="underline decoration-fuchsia-500 decoration-2">
+                  {numeral(repositoriesInfo.totalCount!).format("0,0")}{" "}
+                  repositories
+                </span>{" "}
+                in{" "}
+                <span className="underline decoration-fuchsia-500 decoration-2">
+                  {numeral(repositoriesInfo.numLanguages!).format("0,0")} unique
+                  languages
+                </span>
+                . An average repository size of{" "}
+                <span className="underline decoration-fuchsia-500 decoration-2">
+                  {numeral(repositoriesInfo.avgerageBytesPerRepo!).format(
+                    "0,0"
+                  )}{" "}
+                  bytes
+                </span>
+                .
+              </span>
+            }
+            timestamp={moment(repositoriesInfo.timestamp!).fromNow()}
           />
         </div>
       </ContentSection>
@@ -215,11 +242,13 @@ const Home: NextPage<Props> = ({ totalCommits }) => {
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
-  const totalCommits = await getTotalCommits();
+  const commitsInfo = await getCommitsInfo();
+  const repositoriesInfo = await getRepositoriesInfo();
 
   return {
     props: {
-      totalCommits: totalCommits,
+      commitsInfo: commitsInfo,
+      repositoriesInfo: repositoriesInfo,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
