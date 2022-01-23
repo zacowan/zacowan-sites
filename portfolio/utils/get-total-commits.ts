@@ -1,6 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
-import { graphqlWithAuth } from "../../utils";
+import { graphqlWithAuth } from "./utils";
 
 export type Data = {
   success: boolean;
@@ -14,10 +12,7 @@ export type Data = {
 const START_YEAR = 2018;
 const constructDateString = (yr: number) => `${yr}-01-01T00:00:00Z`;
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+export default async function handler(): Promise<Data> {
   try {
     let totalCommits = 0;
 
@@ -45,16 +40,18 @@ export default async function handler(
     }
     const weeks = (endYear - START_YEAR) * 52.25;
     const years = endYear - START_YEAR;
-    res.status(200).json({
+    return {
       success: true,
       totalCount: totalCommits,
       timeWeeks: weeks,
       timeYears: years,
       averageOverWeeks: totalCommits / weeks,
       timestamp: Date.now(),
-    });
+    };
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false });
+    return {
+      success: false,
+    };
   }
 }

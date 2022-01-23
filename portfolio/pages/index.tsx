@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
 import numeral from "numeral";
 import moment from "moment";
-import type { Data as TotalCommitsType } from "./api/get-total-commits";
+import getTotalCommits, {
+  Data as TotalCommitsType,
+} from "../utils/get-total-commits";
 import ExperienceDataCol from "../components/ExperienceDataCol";
 import ContentSection from "../components/ContentSection";
 
@@ -195,8 +197,7 @@ const Home: NextPage<Props> = ({ totalCommits }) => {
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/get-total-commits");
-  const totalCommits = await res.json();
+  const totalCommits = await getTotalCommits();
 
   return {
     props: {
