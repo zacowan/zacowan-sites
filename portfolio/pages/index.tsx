@@ -37,7 +37,7 @@ const Home: NextPage<Props> = ({ totalCommits }) => {
           </h3>
         </div>
       </section>
-      {/* About */}
+      {/* Experience */}
       <ContentSection
         title="Experience, backed by facts"
         subtitle="Using real GitHub data to analyze skills and contributions."
@@ -62,15 +62,24 @@ const Home: NextPage<Props> = ({ totalCommits }) => {
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 py-20 px-4">
           <ExperienceDataCol
             label={numeral(totalCommits.totalCount!).format("0,0")}
-            desc={`Total commits written over ${numeral(
-              totalCommits.timeWeeks!
-            ).format(
-              "0,0"
-            )} weeks of coding on personal GitHub repositories. An average of ${numeral(
-              totalCommits.averageOverWeeks!
-            ).format("0.0")} commits done per week over the past ${numeral(
-              totalCommits.timeYears!
-            ).format("0,0")} years.`}
+            desc={
+              <span>
+                Total commits written over{" "}
+                <span className="underline decoration-fuchsia-500 decoration-2">
+                  {numeral(totalCommits.timeWeeks!).format("0,0")} weeks
+                </span>{" "}
+                of coding on personal GitHub repositories. An average of{" "}
+                <span className="underline decoration-fuchsia-500 decoration-2">
+                  {numeral(totalCommits.averageOverWeeks!).format("0.0")}{" "}
+                  commits
+                </span>{" "}
+                done per week over the past{" "}
+                <span className="underline decoration-fuchsia-500 decoration-2">
+                  {numeral(totalCommits.timeYears!).format("0,0")} years
+                </span>{" "}
+                .
+              </span>
+            }
             timestamp={moment(totalCommits.timestamp!).fromNow()}
           />
         </div>

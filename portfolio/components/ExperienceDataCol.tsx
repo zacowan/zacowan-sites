@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 type Props = {
   label: string;
-  desc: string;
+  desc: ReactNode;
   timestamp?: string;
 };
 
