@@ -16,7 +16,7 @@ const ContentSection: FC<Props> = ({
 }) => {
   return (
     <section className={alt ? "bg-gray-100" : "bg-white"}>
-      <div className="py-40 container mx-auto space-y-4">
+      <div className="py-40 container mx-auto space-y-4 px-4">
         {icon && <div className="flex items-center justify-center">{icon}</div>}
         <h2 className="md:text-4xl text-3xl font-semibold block text-center">
           {title}

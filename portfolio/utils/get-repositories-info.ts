@@ -8,6 +8,7 @@ export type Data = {
   numLanguages?: number;
   timestamp?: number;
   primaryLanguages?: Array<PrimaryLanguage>;
+  maxBytesPrimaryLanguage?: number;
 };
 
 type PrimaryLanguage = {
@@ -107,12 +108,16 @@ export default async function handler(): Promise<Data> {
     // Sort
     massagedPrimaryLanguages.sort((a, b) => b.bytesWritten - a.bytesWritten);
 
+    // Get max
+    const maxPrimaryBytes = massagedPrimaryLanguages[0].bytesWritten;
+
     return {
       success: true,
       totalCount: user.repositories.totalCount,
       codeBytes: codeBytes,
       avgerageBytesPerRepo: codeBytes / user.repositories.totalCount,
       primaryLanguages: massagedPrimaryLanguages,
+      maxBytesPrimaryLanguage: maxPrimaryBytes,
       numLanguages: languages.length,
       timestamp: Date.now(),
     };

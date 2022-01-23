@@ -7,6 +7,7 @@ import getRepositoriesInfo, {
 } from "../utils/get-repositories-info";
 import ExperienceDataCol from "../components/ExperienceDataCol";
 import ContentSection from "../components/ContentSection";
+import LanguageBar from "../components/LanguageBar";
 
 const LINKEDIN_LINK = "https://www.linkedin.com/in/zacowan/";
 const GITHUB_LINK = "https://github.com/zacowan";
@@ -61,7 +62,7 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
         }
         alt
       >
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-4 py-20 px-4 justify-items-center">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-4 py-20 justify-items-center">
           <ExperienceDataCol
             label={numeral(commitsInfo.totalCount!).format("0,0")}
             desc={
@@ -109,6 +110,27 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
             }
             timestamp={moment(repositoriesInfo.timestamp!).fromNow()}
           />
+        </div>
+        <hr className="py-6" />
+        <div className="flex items-center justify-center flex-col gap-4">
+          <h4 className="text-2xl font-medium">Primary Language Breakdown</h4>
+          <h5 className="text-gray-600 text-sm pb-8">
+            Last updated: {moment(repositoriesInfo.timestamp!).fromNow()}
+          </h5>
+          {repositoriesInfo.primaryLanguages!.map((pl) => (
+            <LanguageBar
+              key={pl.name}
+              name={pl.name}
+              amount={numeral(pl.bytesWritten).format("0b")}
+              width={
+                numeral(
+                  (pl.bytesWritten /
+                    repositoriesInfo.maxBytesPrimaryLanguage!) *
+                    100
+                ).format("0") + "%"
+              }
+            />
+          ))}
         </div>
       </ContentSection>
       {/* Posts */}
@@ -244,8 +266,6 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
 export async function getStaticProps() {
   const commitsInfo = await getCommitsInfo();
   const repositoriesInfo = await getRepositoriesInfo();
-
-  console.log(repositoriesInfo);
 
   return {
     props: {
