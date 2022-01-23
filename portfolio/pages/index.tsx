@@ -84,7 +84,7 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
             timestamp={moment(commitsInfo.timestamp!).fromNow()}
           />
           <ExperienceDataCol
-            label={numeral(repositoriesInfo.spaceBytes!).format("0,0a")}
+            label={numeral(repositoriesInfo.codeBytes!).format("0,0a")}
             desc={
               <span>
                 bytes of code written across{" "}
@@ -244,6 +244,8 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
 export async function getStaticProps() {
   const commitsInfo = await getCommitsInfo();
   const repositoriesInfo = await getRepositoriesInfo();
+
+  console.log(repositoriesInfo);
 
   return {
     props: {
