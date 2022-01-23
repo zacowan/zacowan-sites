@@ -1,11 +1,18 @@
 import type { NextPage } from "next";
+import numeral from "numeral";
+import moment from "moment";
+import type { Data as TotalCommitsType } from "./api/get-total-commits";
 import ExperienceDataCol from "../components/ExperienceDataCol";
 import ContentSection from "../components/ContentSection";
 
 const LINKEDIN_LINK = "https://www.linkedin.com/in/zacowan/";
 const GITHUB_LINK = "https://github.com/zacowan";
 
-const Home: NextPage = () => {
+type Props = {
+  totalCommits: TotalCommitsType;
+};
+
+const Home: NextPage<Props> = ({ totalCommits }) => {
   return (
     <div className="scroll-smooth divide-y">
       {/* Hero */}
@@ -52,16 +59,17 @@ const Home: NextPage = () => {
       >
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 py-20 px-4">
           <ExperienceDataCol
-            label="400,000"
-            desc="Lines of code written across 40 repositories."
-          />
-          <ExperienceDataCol
-            label="400,000"
-            desc="Lines of code written across 40 repositories."
-          />
-          <ExperienceDataCol
-            label="400,000"
-            desc="Lines of code written across 40 repositories."
+            label={numeral(totalCommits.totalCount!).format("0,0")}
+            desc={`Total commits written over ${numeral(
+              totalCommits.timeWeeks!
+            ).format(
+              "0,0"
+            )} weeks of coding on personal GitHub repositories. An average of ${numeral(
+              totalCommits.averageOverWeeks!
+            ).format("0.0")} commits done per week over the past ${numeral(
+              totalCommits.timeYears!
+            ).format("0,0")} years.`}
+            timestamp={moment(totalCommits.timestamp!).fromNow()}
           />
         </div>
       </ContentSection>
@@ -182,5 +190,23 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// revalidation is enabled and a new request comes in
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/api/get-total-commits");
+  const totalCommits = await res.json();
+
+  return {
+    props: {
+      totalCommits: totalCommits,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 24 hours
+    revalidate: 60 * 60 * 24, // In seconds
+  };
+}
 
 export default Home;

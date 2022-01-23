@@ -22,7 +22,9 @@ const ContentSection: FC<Props> = ({
           {title}
         </h2>
         {subtitle && (
-          <h3 className="md:text-xl text-lg block text-center">{subtitle}</h3>
+          <h3 className="md:text-xl text-lg block text-center text-gray-600">
+            {subtitle}
+          </h3>
         )}
         {children}
       </div>
