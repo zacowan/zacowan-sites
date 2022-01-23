@@ -185,6 +185,15 @@ const Home: NextPage<Props> = ({ totalCommits }) => {
               tailwindcss
             </a>{" "}
             by Zachary Cowan.
+            <br />
+            Deployed to the edge using{" "}
+            <a
+              className="font-semibold hover:text-black transition-colors"
+              href="https://vercel.com/"
+            >
+              Vercel
+            </a>
+            .
           </h4>
         </div>
         {/* Made With */}
