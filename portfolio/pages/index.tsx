@@ -22,20 +22,20 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
     <div className="scroll-smooth divide-y">
       {/* Hero */}
       <section className="bg-white">
-        <div className="py-60 container mx-auto space-y-4 text-center">
+        <div className="py-60 px-4 container mx-auto space-y-4 text-center">
           <a
             href={LINKEDIN_LINK}
             className="p-4 font-bold text-sm text-gray-600 hover:text-black transition-colors"
           >
             @zacowan
           </a>
-          <h2 className="md:text-8xl text-6xl font-semibold block py-6">
+          <h2 className="md:text-8xl text-5xl font-semibold block py-6">
             Hi, I&apos;m{" "}
             <span className="text-white box-decoration-clone bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-6 rounded-lg shadow-lg shadow-indigo-500/50 transition hover:shadow-xl hover:shadow-indigo-500/50">
               Zach
             </span>
           </h2>
-          <h3 className="md:text-2xl text-xl block">
+          <h3 className="md:text-2xl text-lg block">
             Software Engineering. Data Science. Design.
           </h3>
         </div>
@@ -241,8 +241,8 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
               href="https://tailwindcss.com/"
             >
               tailwindcss
-            </a>{" "}
-            by Zachary Cowan.
+            </a>
+            .
             <br />
             Deployed to the edge using{" "}
             <a
