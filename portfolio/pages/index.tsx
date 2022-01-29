@@ -5,12 +5,13 @@ import getCommitsInfo, { Data as CommitsInfo } from "../utils/get-commits-info";
 import getRepositoriesInfo, {
   Data as RepositoriesInfo,
 } from "../utils/get-repositories-info";
+import FOOTER_LINKS, {
+  GITHUB_LINK,
+  LINKEDIN_LINK,
+} from "../static/footer-links";
 import ExperienceDataCol from "../components/ExperienceDataCol";
 import ContentSection from "../components/ContentSection";
 import LanguageBar from "../components/LanguageBar";
-
-const LINKEDIN_LINK = "https://www.linkedin.com/in/zacowan/";
-const GITHUB_LINK = "https://github.com/zacowan";
 
 type Props = {
   commitsInfo: CommitsInfo;
@@ -19,7 +20,7 @@ type Props = {
 
 const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
   return (
-    <div className="scroll-smooth divide-y">
+    <div className="divide-y">
       {/* Hero */}
       <section className="bg-white">
         <div className="py-60 px-4 container mx-auto space-y-4 text-center">
@@ -189,30 +190,35 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
       </ContentSection>
       {/* Footer */}
       <footer className="bg-indigo-100">
-        <div className="md:py-20 py-10 px-10 container mx-auto">
+        <div className="md:py-20 py-10 px-4 container mx-auto">
           {/* Links */}
-          <div className="space-y-3">
-            <h4 className="font-medium text-base">Links</h4>
-            <ul className="space-y-1">
-              <li>
-                <a
-                  className="hover:text-black text-sm text-gray-600 transition-colors"
-                  href={GITHUB_LINK}
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-black text-sm text-gray-600 transition-colors"
-                  href={LINKEDIN_LINK}
-                >
-                  LinkedIn
-                </a>
-              </li>
-            </ul>
-          </div>
-          <h4 className="pt-6 text-xs text-gray-600">
+          <ul className="flex items-center justify-center space-x-4">
+            {FOOTER_LINKS.map((l, index) => {
+              const base = (
+                <li>
+                  <a
+                    className="hover:text-black text-sm text-gray-600 transition-colors"
+                    href={l.href}
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              );
+
+              if (index >= FOOTER_LINKS.length - 1) {
+                return base;
+              } else {
+                return (
+                  <>
+                    {base}
+                    <div className="text-gray-600">&bull;</div>
+                  </>
+                );
+              }
+            })}
+          </ul>
+          {/* Callouts */}
+          <h4 className="pt-6 text-xs text-gray-600 text-center">
             Made with{" "}
             <span>
               <svg
