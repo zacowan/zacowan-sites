@@ -20,17 +20,17 @@ type Props = {
 
 const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
   return (
-    <div className="divide-y">
+    <div className="divide-y text-slate-600">
       {/* Hero */}
-      <section className="bg-white">
+      <section className="dotted-background bg-slate-50">
         <div className="container mx-auto space-y-4 py-60 px-4 text-center">
           <a
             href={LINKEDIN_LINK}
-            className="p-4 text-sm font-bold text-gray-600 transition-colors hover:text-black"
+            className="p-4 text-sm font-bold transition-colors hover:text-slate-900"
           >
             @zacowan
           </a>
-          <h2 className="block py-6 text-5xl font-semibold md:text-8xl">
+          <h2 className="block py-6 text-5xl font-semibold text-slate-900 md:text-8xl">
             Hi, I&apos;m{" "}
             <span className="rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 box-decoration-clone px-6 text-white shadow-lg shadow-indigo-500/50 transition hover:shadow-xl hover:shadow-indigo-500/50">
               Zach
@@ -114,8 +114,10 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
         </div>
         <hr className="py-6" />
         <div className="flex flex-col items-center justify-center gap-4">
-          <h4 className="text-2xl font-medium">Primary Language Breakdown</h4>
-          <h5 className="pb-8 text-sm text-gray-600">
+          <h4 className="text-2xl font-medium text-slate-900">
+            Primary Language Breakdown
+          </h4>
+          <h5 className="pb-8 text-sm">
             Last updated: {moment(repositoriesInfo.timestamp!).fromNow()}
           </h5>
           {repositoriesInfo.primaryLanguages!.map((pl, index) => (
@@ -189,7 +191,7 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
         </div>
       </ContentSection>
       {/* Footer */}
-      <footer className="bg-indigo-100">
+      <footer className="bg-slate-50">
         <div className="container mx-auto py-10 px-4 md:py-20">
           {/* Links */}
           <ul className="flex items-center justify-center space-x-4">
@@ -197,7 +199,7 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
               const base = (
                 <li key={l.label + index}>
                   <a
-                    className="text-sm text-gray-600 transition-colors hover:text-black"
+                    className="text-sm transition-colors hover:text-slate-900"
                     href={l.href}
                   >
                     {l.label}
@@ -211,19 +213,19 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
                 return (
                   <>
                     {base}
-                    <div className="text-gray-600">&bull;</div>
+                    <div>&bull;</div>
                   </>
                 );
               }
             })}
           </ul>
           {/* Callouts */}
-          <h4 className="pt-6 text-center text-xs text-gray-600">
+          <h4 className="pt-6 text-center text-xs">
             Made with{" "}
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="inline h-6 w-6 animate-bounce text-red-500"
+                className="inline h-6 w-6 animate-bounce text-rose-500"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -236,14 +238,14 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
             </span>{" "}
             using{" "}
             <a
-              className="font-semibold transition-colors hover:text-black"
+              className="font-semibold transition-colors hover:text-slate-900"
               href="https://nextjs.org/"
             >
               Next.js
             </a>{" "}
             and{" "}
             <a
-              className="font-semibold transition-colors hover:text-black"
+              className="font-semibold transition-colors hover:text-slate-900"
               href="https://tailwindcss.com/"
             >
               tailwindcss
@@ -252,7 +254,7 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
             <br />
             Deployed to the edge using{" "}
             <a
-              className="font-semibold transition-colors hover:text-black"
+              className="font-semibold transition-colors hover:text-slate-900"
               href="https://vercel.com/"
             >
               Vercel

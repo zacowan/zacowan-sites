@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dotted-background {
+  background-image: radial-gradient(#e5e7eb 20%, transparent 20%);
+  background-position: 0 0, 5px 5px;
+  background-size: 10px 10px;
+}

@@ -12,12 +12,8 @@ const ExperienceDataCol: FC<Props> = ({ label, desc, timestamp }) => {
       <h3 className="block pb-4 text-center text-8xl font-extrabold tabular-nums text-indigo-500">
         {label}
       </h3>
-      <p className="text-lg text-gray-600">{desc}</p>
-      {timestamp && (
-        <h4 className="pt-6 text-xs text-gray-600">
-          Last updated: {timestamp}
-        </h4>
-      )}
+      <p className="text-lg">{desc}</p>
+      {timestamp && <h4 className="pt-6 text-xs">Last updated: {timestamp}</h4>}
     </div>
   );
 };

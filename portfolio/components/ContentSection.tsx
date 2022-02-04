@@ -15,10 +15,14 @@ const ContentSection: FC<Props> = ({
   alt,
 }) => {
   return (
-    <section className={alt ? "bg-gray-100" : "bg-white"}>
+    <section className={alt ? "bg-slate-100" : "bg-slate-50"}>
       <div className="container mx-auto space-y-4 py-40 px-4">
-        {icon && <div className="flex items-center justify-center">{icon}</div>}
-        <h2 className="block text-center text-3xl font-semibold md:text-4xl">
+        {icon && (
+          <div className="flex items-center justify-center text-slate-900">
+            {icon}
+          </div>
+        )}
+        <h2 className="block text-center text-3xl font-semibold text-slate-900 md:text-4xl">
           {title}
         </h2>
         {subtitle && (
