@@ -5,6 +5,9 @@ import getCommitsInfo, { Data as CommitsInfo } from "../utils/get-commits-info";
 import getRepositoriesInfo, {
   Data as RepositoriesInfo,
 } from "../utils/get-repositories-info";
+import getRecentPosts, {
+  Data as RecentPostsInfo,
+} from "../utils/get-recent-posts";
 import FOOTER_LINKS, {
   GITHUB_LINK,
   LINKEDIN_LINK,
@@ -12,13 +15,19 @@ import FOOTER_LINKS, {
 import ExperienceDataCol from "../components/ExperienceDataCol";
 import ContentSection from "../components/ContentSection";
 import LanguageBar from "../components/LanguageBar";
+import RecentPostCard from "../components/RecentPostCard";
 
 type Props = {
   commitsInfo: CommitsInfo;
   repositoriesInfo: RepositoriesInfo;
+  recentPostsInfo: RecentPostsInfo;
 };
 
-const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
+const Home: NextPage<Props> = ({
+  commitsInfo,
+  repositoriesInfo,
+  recentPostsInfo,
+}) => {
   return (
     <div className="divide-y text-slate-600">
       {/* Hero */}
@@ -158,7 +167,17 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
           </svg>
         }
       >
-        TODO
+        <div className="grid grid-cols-1 justify-items-center gap-4 py-20 md:grid-cols-3">
+          {recentPostsInfo.posts?.map((post) => (
+            <RecentPostCard
+              key={post._uid}
+              image={post.image}
+              intro={post.intro}
+              title={post.title}
+              tags={post.tags}
+            />
+          ))}
+        </div>
       </ContentSection>
       {/* Contact */}
       <ContentSection
@@ -274,11 +293,13 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
 export async function getStaticProps() {
   const commitsInfo = await getCommitsInfo();
   const repositoriesInfo = await getRepositoriesInfo();
+  const recentPosts = await getRecentPosts();
 
   return {
     props: {
       commitsInfo: commitsInfo,
       repositoriesInfo: repositoriesInfo,
+      recentPostsInfo: recentPosts,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in

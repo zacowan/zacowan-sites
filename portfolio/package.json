@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@octokit/graphql": "^4.8.0",
+    "@tailwindcss/line-clamp": "^0.3.1",
     "@types/numeral": "^2.0.2",
     "autoprefixer": "^10.4.2",
     "axios": "^0.25.0",
