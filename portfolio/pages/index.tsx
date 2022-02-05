@@ -32,11 +32,11 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
           </a>
           <h2 className="block py-6 text-5xl font-semibold text-slate-900 md:text-8xl">
             Hi, I&apos;m{" "}
-            <span className="rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 box-decoration-clone px-6 text-white shadow-lg shadow-indigo-500/50 transition hover:shadow-xl hover:shadow-indigo-500/50">
+            <span className="rounded-lg bg-gradient-to-r from-indigo-500 to-fuchsia-500 box-decoration-clone px-6 text-slate-50 shadow-lg shadow-indigo-500/50">
               Zach
             </span>
           </h2>
-          <h3 className="block text-lg md:text-2xl">
+          <h3 className="block text-lg text-slate-900 md:text-2xl">
             Software Engineering. Data Science. Design.
           </h3>
         </div>
@@ -184,7 +184,7 @@ const Home: NextPage<Props> = ({ commitsInfo, repositoriesInfo }) => {
         <div className="py-8 text-center">
           <a
             href={LINKEDIN_LINK}
-            className="rounded-lg bg-indigo-500 py-4 px-10 text-lg text-white shadow-lg shadow-indigo-500/50 transition-colors hover:bg-indigo-400 md:text-xl"
+            className="rounded-lg bg-indigo-500 py-4 px-10 text-lg text-slate-50 shadow-lg shadow-indigo-500/50 transition-colors hover:bg-indigo-400 md:text-xl"
           >
             Connect with me
           </a>
