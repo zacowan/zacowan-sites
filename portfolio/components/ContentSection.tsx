@@ -5,6 +5,7 @@ type Props = {
   subtitle?: string;
   icon?: ReactNode;
   alt?: boolean;
+  childrenOutside?: boolean;
 };
 
 const ContentSection: FC<Props> = ({
@@ -13,6 +14,7 @@ const ContentSection: FC<Props> = ({
   icon,
   children,
   alt,
+  childrenOutside,
 }) => {
   return (
     <section className={alt ? "bg-slate-100" : "bg-slate-50"}>
@@ -30,8 +32,9 @@ const ContentSection: FC<Props> = ({
             {subtitle}
           </h3>
         )}
-        {children}
+        {!childrenOutside && children}
       </div>
+      {childrenOutside && children}
     </section>
   );
 };

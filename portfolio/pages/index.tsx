@@ -1,3 +1,4 @@
+import React from "react";
 import type { NextPage } from "next";
 import numeral from "numeral";
 import moment from "moment";
@@ -16,7 +17,7 @@ import ExperienceDataCol from "../components/ExperienceDataCol";
 import ContentSection from "../components/ContentSection";
 import LanguageBar from "../components/LanguageBar";
 import RecentPostCard from "../components/RecentPostCard";
-import React from "react";
+import HorizontalScrollButton from "../components/HorizontalScrollButton";
 
 type Props = {
   commitsInfo: CommitsInfo;
@@ -30,7 +31,7 @@ const Home: NextPage<Props> = ({
   recentPostsInfo,
 }) => {
   return (
-    <div className="divide-y text-slate-600">
+    <main className="divide-y text-slate-600">
       {/* Hero */}
       <section className="dotted-background bg-slate-50">
         <div className="container mx-auto space-y-4 py-60 px-4 text-center">
@@ -148,6 +149,7 @@ const Home: NextPage<Props> = ({
       </ContentSection>
       {/* Posts */}
       <ContentSection
+        childrenOutside
         title="Purpose-built projects"
         subtitle="A collection of blog posts highlighting the most impactful projects
             I've worked on."
@@ -168,16 +170,26 @@ const Home: NextPage<Props> = ({
           </svg>
         }
       >
-        <div className="grid grid-cols-1 justify-items-center gap-4 py-20 md:grid-cols-3">
-          {recentPostsInfo.posts?.map((post) => (
-            <RecentPostCard
-              key={post._uid}
-              image={post.image}
-              intro={post.intro}
-              title={post.title}
-              tags={post.tags}
-            />
-          ))}
+        <div className="group relative -mt-20 w-full">
+          <HorizontalScrollButton scrollID="recent-posts" dir="left" />
+          <div
+            id="recent-posts"
+            className="snap-x space-x-4 overflow-x-auto overflow-y-hidden scroll-smooth whitespace-nowrap py-20"
+          >
+            <span className="pl-4" />
+            {recentPostsInfo.posts?.map((post) => (
+              <RecentPostCard
+                key={post._uid}
+                image={post.image}
+                intro={post.intro}
+                title={post.title}
+                tags={post.tags}
+              />
+            ))}
+            <span className="pr-4" />
+          </div>
+
+          <HorizontalScrollButton scrollID="recent-posts" dir="right" />
         </div>
       </ContentSection>
       {/* Contact */}
@@ -282,9 +294,8 @@ const Home: NextPage<Props> = ({
             .
           </h4>
         </div>
-        {/* Made With */}
       </footer>
-    </div>
+    </main>
   );
 };
 
