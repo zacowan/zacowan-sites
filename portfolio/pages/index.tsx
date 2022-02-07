@@ -16,6 +16,7 @@ import ExperienceDataCol from "../components/ExperienceDataCol";
 import ContentSection from "../components/ContentSection";
 import LanguageBar from "../components/LanguageBar";
 import RecentPostCard from "../components/RecentPostCard";
+import React from "react";
 
 type Props = {
   commitsInfo: CommitsInfo;
@@ -216,7 +217,7 @@ const Home: NextPage<Props> = ({
           <ul className="flex items-center justify-center space-x-4">
             {FOOTER_LINKS.map((l, index) => {
               const base = (
-                <li key={l.label + index}>
+                <li>
                   <a
                     className="text-sm transition-colors hover:text-slate-900"
                     href={l.href}
@@ -230,10 +231,10 @@ const Home: NextPage<Props> = ({
                 return base;
               } else {
                 return (
-                  <>
+                  <React.Fragment key={l.label + index}>
                     {base}
                     <div>&bull;</div>
-                  </>
+                  </React.Fragment>
                 );
               }
             })}
