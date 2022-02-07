@@ -48,7 +48,7 @@ const HorizontalScrollButton: FC<Props> = ({ dir, scrollID }) => {
         onClick={() => {
           document.getElementById(scrollID)!.scrollLeft -= SCROLL_AMOUNT;
         }}
-        className="absolute top-1/2 left-4 z-10 -mt-10 hidden scale-0 rounded-full bg-slate-900 p-4 text-slate-50 opacity-0 shadow transition-all duration-300 group-hover:scale-100 group-hover:opacity-50 group-hover:hover:opacity-70 md:block"
+        className="absolute top-1/2 left-4 z-10 -mt-10 hidden scale-75 rounded-full bg-slate-900 p-4 text-slate-50 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-50 group-hover:hover:opacity-70 md:block"
       >
         {LEFT_CHEVRON}
       </button>
@@ -59,7 +59,7 @@ const HorizontalScrollButton: FC<Props> = ({ dir, scrollID }) => {
         onClick={() => {
           document.getElementById(scrollID)!.scrollLeft += SCROLL_AMOUNT;
         }}
-        className="absolute top-1/2 right-4 z-10 -mt-10 hidden scale-0 rounded-full bg-slate-900 p-4 text-slate-50 opacity-0 shadow transition-all duration-300 group-hover:scale-100 group-hover:opacity-50 group-hover:hover:opacity-70 md:block"
+        className="absolute top-1/2 right-4 z-10 -mt-10 hidden scale-75 rounded-full bg-slate-900 p-4 text-slate-50 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-50 group-hover:hover:opacity-70 md:block"
       >
         {RIGHT_CHEVRON}
       </button>

@@ -170,11 +170,11 @@ const Home: NextPage<Props> = ({
           </svg>
         }
       >
-        <div className="group relative -mt-20 w-full">
+        <div className="group relative -mt-20 flex w-full justify-center">
           <HorizontalScrollButton scrollID="recent-posts" dir="left" />
           <div
             id="recent-posts"
-            className="snap-x space-x-4 overflow-x-auto overflow-y-hidden scroll-smooth whitespace-nowrap py-20"
+            className="snap-x space-x-4 overflow-x-auto overflow-y-hidden overscroll-x-contain scroll-smooth whitespace-nowrap py-20"
           >
             <span className="pl-4" />
             {recentPostsInfo.posts?.map((post) => (
