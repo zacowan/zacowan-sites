@@ -16,7 +16,7 @@ const ContentSection: FC<Props> = ({
 }) => {
   return (
     <section className={alt ? "bg-slate-100" : "bg-slate-50"}>
-      <div className="container mx-auto space-y-4 py-40 px-4">
+      <div className="container mx-auto space-y-4 py-20 px-4">
         {icon && (
           <div className="flex items-center justify-center text-slate-900">
             {icon}

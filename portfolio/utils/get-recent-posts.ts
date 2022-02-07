@@ -25,7 +25,7 @@ export default async function handler(): Promise<Data> {
     data.stories.forEach((s: any) => {
       if (s.content) {
         let content = s.content;
-        content.tags = s.content.tags.split(",");
+        content.tags = s.content.tags.split(",").trim();
         posts.push(s.content);
       }
     });
