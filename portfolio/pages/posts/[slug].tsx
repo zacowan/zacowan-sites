@@ -1,8 +1,10 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { micromark } from "micromark";
+import ReactMarkdown from "react-markdown";
 import getPosts, { Post } from "../../utils/get-posts";
 import getPost from "../../utils/get-post";
+import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 import Image from "next/image";
 
 type Props = {
@@ -36,10 +38,11 @@ const Post: NextPage<Props> = ({ post }) => {
       <div className="relative h-96 w-96 self-center">
         <Image src={post.image} alt="" layout="fill" />
       </div>
-      <article
-        className="prose lg:prose-xl prose-slate"
-        dangerouslySetInnerHTML={{ __html: micromark(post.long_text) }}
-      />
+      <article className="prose lg:prose-xl prose-slate">
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]}>
+          {post.long_text}
+        </ReactMarkdown>
+      </article>
     </div>
   );
 };
