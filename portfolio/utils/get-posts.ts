@@ -7,6 +7,8 @@ export type Data = {
 
 export type Post = {
   _uid: string;
+  slug: string;
+  full_slug: string;
   title: string;
   image: string;
   intro: string;
@@ -27,7 +29,9 @@ export default async function handler(): Promise<Data> {
         let content = s.content;
         content.tags = s.content.tags.split(",");
         content.tags.forEach((t: string) => (t = t.trim()));
-        posts.push(s.content);
+        content["full_slug"] = s.full_slug;
+        content["slug"] = s.slug;
+        posts.push(content);
       }
     });
     return {

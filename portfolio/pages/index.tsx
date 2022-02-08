@@ -5,9 +5,7 @@ import getCommitsInfo, { Data as CommitsInfo } from "../utils/get-commits-info";
 import getRepositoriesInfo, {
   Data as RepositoriesInfo,
 } from "../utils/get-repositories-info";
-import getRecentPosts, {
-  Data as RecentPostsInfo,
-} from "../utils/get-recent-posts";
+import getPosts, { Data as PostsInfo } from "../utils/get-posts";
 import FOOTER_LINKS, {
   GITHUB_LINK,
   LINKEDIN_LINK,
@@ -21,7 +19,7 @@ import HorizontalScrollButton from "../components/HorizontalScrollButton";
 type Props = {
   commitsInfo: CommitsInfo;
   repositoriesInfo: RepositoriesInfo;
-  recentPostsInfo: RecentPostsInfo;
+  recentPostsInfo: PostsInfo;
 };
 
 const Home: NextPage<Props> = ({
@@ -179,6 +177,7 @@ const Home: NextPage<Props> = ({
             {recentPostsInfo.posts?.map((post) => (
               <RecentPostCard
                 key={post._uid}
+                fullSlug={post.full_slug}
                 image={post.image}
                 intro={post.intro}
                 title={post.title}
@@ -294,7 +293,7 @@ const Home: NextPage<Props> = ({
 export async function getStaticProps() {
   const commitsInfo = await getCommitsInfo();
   const repositoriesInfo = await getRepositoriesInfo();
-  const recentPosts = await getRecentPosts();
+  const recentPosts = await getPosts();
 
   return {
     props: {
