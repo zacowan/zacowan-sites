@@ -31,6 +31,7 @@ export default async function handler(): Promise<Data> {
         content.tags.forEach((t: string) => (t = t.trim()));
         content["full_slug"] = s.full_slug;
         content["slug"] = s.slug;
+        content.image = s.content.image.filename + "/m/";
         posts.push(content);
       }
     });

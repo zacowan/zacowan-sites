@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import getPosts, { Post } from "../../utils/get-posts";
@@ -12,33 +13,40 @@ type Props = {
 };
 
 const Post: NextPage<Props> = ({ post }) => {
+  const router = useRouter();
   return (
-    <div className="container mx-auto flex flex-col items-center space-y-4 p-4">
-      <div className="container max-w-prose self-center text-xl">
-        <Link href="/posts">
-          <a className="flex w-fit items-center py-2 text-indigo-500 hover:underline">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="inline-block h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            All Posts
-          </a>
-        </Link>
+    <div className="container mx-auto flex flex-col items-center space-y-4 px-4 py-20">
+      <div className="container max-w-prose self-center">
+        <a
+          onClick={() => router.back()}
+          className="flex w-fit cursor-pointer items-center py-2 text-indigo-500 hover:underline"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="inline-block h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Back
+        </a>
       </div>
-      <div className="relative h-96 w-96 self-center">
-        <Image src={post.image} alt="" layout="fill" />
+      <div className="relative h-96 w-full max-w-prose self-center">
+        <Image
+          src={post.image + "1310x768/smart"}
+          alt=""
+          layout="fill"
+          objectFit="contain"
+        />
       </div>
-      <article className="prose lg:prose-xl prose-slate">
+      <article className="prose prose-indigo">
         <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]}>
           {post.long_text}
         </ReactMarkdown>

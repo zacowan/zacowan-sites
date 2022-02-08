@@ -16,6 +16,7 @@ export default async function handler(slug: string): Promise<Data> {
       content.tags.forEach((t: string) => (t = t.trim()));
       content["full_slug"] = data.story.full_slug;
       content["slug"] = data.story.slug;
+      content.image = data.story.content.image.filename + "/m/";
       post = content;
     }
     return {
