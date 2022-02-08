@@ -1,4 +1,3 @@
-import React from "react";
 import type { NextPage } from "next";
 import numeral from "numeral";
 import moment from "moment";
@@ -227,29 +226,19 @@ const Home: NextPage<Props> = ({
         <div className="container mx-auto py-10 px-4 md:py-20">
           {/* Links */}
           <ul className="flex items-center justify-center space-x-4">
-            {FOOTER_LINKS.map((l, index) => {
-              const base = (
-                <li>
-                  <a
-                    className="text-sm transition-colors hover:text-slate-900"
-                    href={l.href}
-                  >
-                    {l.label}
-                  </a>
-                </li>
-              );
-
-              if (index >= FOOTER_LINKS.length - 1) {
-                return base;
-              } else {
-                return (
-                  <React.Fragment key={l.label + index}>
-                    {base}
-                    <div>&bull;</div>
-                  </React.Fragment>
-                );
-              }
-            })}
+            {FOOTER_LINKS.map((l, index) => (
+              <li key={l.label + index}>
+                <a
+                  className="text-sm transition-colors hover:text-slate-900"
+                  href={l.href}
+                >
+                  {l.label}
+                </a>
+                {index < FOOTER_LINKS.length - 1 && (
+                  <span className="pl-4">&bull;</span>
+                )}
+              </li>
+            ))}
           </ul>
           {/* Callouts */}
           <h4 className="pt-6 text-center text-xs">
