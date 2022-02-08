@@ -227,13 +227,13 @@ const Home: NextPage<Props> = ({
 export async function getStaticProps() {
   const commitsInfo = await getCommitsInfo();
   const repositoriesInfo = await getRepositoriesInfo();
-  const recentPosts = await getPosts();
+  const postsInfo = await getPosts();
 
   return {
     props: {
       commitsInfo: commitsInfo,
       repositoriesInfo: repositoriesInfo,
-      recentPostsInfo: recentPosts,
+      recentPostsInfo: postsInfo,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in

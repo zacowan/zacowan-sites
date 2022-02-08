@@ -46,7 +46,7 @@ const Post: NextPage<Props> = ({ post }) => {
           objectFit="contain"
         />
       </div>
-      <article className="prose prose-indigo">
+      <article className="prose prose-indigo w-full">
         <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]}>
           {post.long_text}
         </ReactMarkdown>
