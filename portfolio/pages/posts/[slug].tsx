@@ -1,6 +1,9 @@
-import type { NextPage } from "next";
+import type {
+  NextPage,
+  GetStaticPathsResult,
+  GetStaticPropsResult,
+} from "next";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import getPosts, { Post } from "../../utils/get-posts";
 import getPost from "../../utils/get-post";
@@ -9,11 +12,12 @@ import rehypeSlug from "rehype-slug";
 import Image from "next/image";
 
 type Props = {
-  post: Post;
+  post: Post | null;
 };
 
 const Post: NextPage<Props> = ({ post }) => {
   const router = useRouter();
+
   return (
     <div className="container mx-auto flex flex-col items-center space-y-4 px-4 py-20">
       <div className="container max-w-prose self-center">
@@ -38,25 +42,33 @@ const Post: NextPage<Props> = ({ post }) => {
           Back
         </a>
       </div>
-      <div className="relative h-96 w-full max-w-prose self-center">
-        <Image
-          src={post.image + "1310x768/smart"}
-          alt=""
-          layout="fill"
-          objectFit="contain"
-        />
-      </div>
-      <article className="prose prose-indigo w-full">
-        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]}>
-          {post.long_text}
-        </ReactMarkdown>
-      </article>
+      {post && (
+        <>
+          <div className="relative h-96 w-full max-w-prose self-center">
+            <Image
+              src={post.image + "1310x768/smart"}
+              alt=""
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
+          <article className="prose prose-indigo w-full">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeSlug]}
+            >
+              {post.long_text}
+            </ReactMarkdown>
+          </article>
+        </>
+      )}
+      {!post && <p>Whoops! Looks like this post can no longer be found.</p>}
     </div>
   );
 };
 
 // This function gets called at build time
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   // Call an external API endpoint to get posts
   const postsInfo = await getPosts();
   let posts: Array<Post> = [];
@@ -72,7 +84,7 @@ export async function getStaticPaths() {
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 }
 
 type Params = {
@@ -82,13 +94,21 @@ type Params = {
 };
 
 // This also gets called at build time
-export async function getStaticProps({ params }: Params) {
+export async function getStaticProps({
+  params,
+}: Params): Promise<GetStaticPropsResult<Props>> {
   // params contains the post `slug`.
   // If the route is like /posts/post-name, then params.slug is post-name
   const postInfo = await getPost(params.slug);
 
   // Pass post data to the page via props
-  return { props: { post: postInfo.post } };
+  return {
+    props: { post: postInfo.post || null },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 24 hours
+    revalidate: 60 * 60 * 24, // In seconds
+  };
 }
 
 export default Post;

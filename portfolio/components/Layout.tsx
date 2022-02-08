@@ -1,10 +1,10 @@
-import { FC, Fragment } from "react";
+import { FC } from "react";
 import FOOTER_LINKS from "../utils/footer-links";
 
 const Layout: FC = ({ children }) => {
   return (
     <div className="divide-y bg-slate-50 text-slate-600">
-      <main>{children}</main>
+      <main className="min-h-screen">{children}</main>
       {/* Footer */}
       <footer className="bg-slate-50">
         <div className="container mx-auto py-10 px-4 md:py-20">
