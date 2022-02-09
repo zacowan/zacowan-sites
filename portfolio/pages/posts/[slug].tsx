@@ -3,7 +3,7 @@ import type {
   GetStaticPathsResult,
   GetStaticPropsResult,
 } from "next";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import getPosts, { Post } from "../../utils/get-posts";
 import getPost from "../../utils/get-post";
@@ -16,31 +16,28 @@ type Props = {
 };
 
 const Post: NextPage<Props> = ({ post }) => {
-  const router = useRouter();
-
   return (
     <div className="container mx-auto flex flex-col items-center space-y-4 px-4 py-20">
       <div className="container max-w-prose self-center">
-        <a
-          onClick={() => router.back()}
-          className="flex w-fit cursor-pointer items-center py-2 text-indigo-500 hover:underline"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="inline-block h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-          Back
-        </a>
+        <Link href="/#posts">
+          <a className="flex w-fit cursor-pointer items-center py-2 text-indigo-500 hover:underline">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="inline-block h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            All posts
+          </a>
+        </Link>
       </div>
       {post && (
         <>

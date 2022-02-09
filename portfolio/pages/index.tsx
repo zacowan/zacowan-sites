@@ -145,7 +145,7 @@ const Home: NextPage<Props> = ({
       <ContentSection
         childrenOutside
         title="Purpose-built projects"
-        subtitle="A collection of blog posts highlighting the most impactful projects
+        subtitle="A collection of posts highlighting the most impactful projects
             I've worked on."
         icon={
           <svg
@@ -164,7 +164,10 @@ const Home: NextPage<Props> = ({
           </svg>
         }
       >
-        <div className="group relative -mt-20 flex w-full justify-center">
+        <div
+          id="posts"
+          className="group relative -mt-20 flex w-full justify-center"
+        >
           <HorizontalScrollButton scrollID="recent-posts" dir="left" />
           <div
             id="recent-posts"
