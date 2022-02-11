@@ -72,8 +72,8 @@ const Home: NextPage<Props> = ({
           </svg>
         }
       >
-        <div className="mx-auto flex w-fit flex-col rounded-lg p-8 py-20 lg:flex-row">
-          <div className="relative h-72 w-72 flex-shrink-0 self-center overflow-clip rounded-full">
+        <div className="mx-auto flex w-fit flex-col rounded-lg py-20 lg:flex-row">
+          <div className="relative h-72 w-72 flex-shrink-0 self-center overflow-hidden rounded-full">
             <Image
               src={aboutInfo.about!.picture + "/576x576/smart"}
               layout="fill"
