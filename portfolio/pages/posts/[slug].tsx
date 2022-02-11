@@ -17,7 +17,7 @@ type Props = {
 
 const Post: NextPage<Props> = ({ post }) => {
   return (
-    <div className="container mx-auto flex flex-col items-center space-y-4 px-4 py-20">
+    <div className="container mx-auto flex flex-col items-center space-y-4 p-4 pb-20">
       <div className="container max-w-prose self-center">
         <Link href="/#posts">
           <a className="flex w-fit cursor-pointer items-center py-2 text-indigo-500 hover:underline">
@@ -41,12 +41,12 @@ const Post: NextPage<Props> = ({ post }) => {
       </div>
       {post && (
         <>
-          <div className="relative h-96 w-full max-w-prose self-center">
+          <div className="relative h-72 w-full max-w-prose self-center md:h-96">
             <Image
               src={post.image + "1310x768/smart"}
               alt=""
               layout="fill"
-              objectFit="contain"
+              objectFit="cover"
             />
           </div>
           <article className="prose prose-indigo w-full">

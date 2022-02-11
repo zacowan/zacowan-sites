@@ -7,7 +7,7 @@ const Layout: FC = ({ children }) => {
       <main className="min-h-screen">{children}</main>
       {/* Footer */}
       <footer className="bg-slate-50">
-        <div className="container mx-auto py-10 px-4 md:py-20">
+        <div className="container mx-auto max-w-prose py-10 px-4 md:py-20">
           {/* Links */}
           <ul className="flex items-center justify-center space-x-4">
             {FOOTER_LINKS.map((l, index) => (
@@ -66,6 +66,8 @@ const Layout: FC = ({ children }) => {
             </a>
             .
           </h4>
+          {/* Signature */}
+          <h4 className="pt-6 text-center text-xs">Zachary Cowan</h4>
         </div>
       </footer>
     </div>
