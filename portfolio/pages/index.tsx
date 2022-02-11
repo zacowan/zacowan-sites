@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Image from "next/image";
 import numeral from "numeral";
 import moment from "moment";
 import getCommitsInfo, { Data as CommitsInfo } from "../utils/get-commits-info";
@@ -6,23 +7,27 @@ import getRepositoriesInfo, {
   Data as RepositoriesInfo,
 } from "../utils/get-repositories-info";
 import getPosts, { Data as PostsInfo } from "../utils/get-posts";
+import getAboutMe, { Data as AboutInfo } from "../utils/get-about-me";
 import { LINKEDIN_LINK } from "../utils/footer-links";
 import ExperienceDataCol from "../components/ExperienceDataCol";
 import ContentSection from "../components/ContentSection";
 import LanguageBar from "../components/LanguageBar";
 import RecentPostCard from "../components/RecentPostCard";
 import HorizontalScrollButton from "../components/HorizontalScrollButton";
+import AboutTextSection from "../components/AboutTextSection";
 
 type Props = {
   commitsInfo: CommitsInfo;
   repositoriesInfo: RepositoriesInfo;
   recentPostsInfo: PostsInfo;
+  aboutInfo: AboutInfo;
 };
 
 const Home: NextPage<Props> = ({
   commitsInfo,
   repositoriesInfo,
   recentPostsInfo,
+  aboutInfo,
 }) => {
   return (
     <div className="divide-y">
@@ -42,10 +47,53 @@ const Home: NextPage<Props> = ({
             </span>
           </h2>
           <h3 className="block text-lg text-slate-900 md:text-2xl">
-            Software Engineering. Data Science. Design.
+            Software engineer & design enthusiast.
           </h3>
         </div>
       </section>
+      {/* About Me */}
+      <ContentSection
+        title="Let's get to know each other"
+        subtitle="A little bit about me."
+        icon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-24 w-24"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+            />
+          </svg>
+        }
+      >
+        <div className="mx-auto flex w-fit flex-col rounded-lg p-8 py-20 lg:flex-row">
+          <div className="relative h-72 w-72 flex-shrink-0 self-center overflow-clip rounded-full">
+            <Image
+              src={aboutInfo.about!.picture + "/576x576/smart"}
+              layout="fill"
+              objectFit="cover"
+              alt=""
+            />
+          </div>
+          <div className="max-w-prose space-y-4 pt-12 lg:pl-12 lg:pt-0">
+            <AboutTextSection title="Who am I?" text={aboutInfo.about!.who} />
+            <AboutTextSection
+              title="What am I passionate about?"
+              text={aboutInfo.about!.passion}
+            />
+            <AboutTextSection
+              title="What are my goals?"
+              text={aboutInfo.about!.goals}
+            />
+          </div>
+        </div>
+      </ContentSection>
       {/* Experience */}
       <ContentSection
         title="Experience, backed by facts"
@@ -61,14 +109,14 @@ const Home: NextPage<Props> = ({
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+              strokeWidth={2}
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
             />
           </svg>
         }
         alt
       >
-        <div className="grid grid-cols-1 justify-items-center gap-4 py-20 md:grid-cols-2">
+        <div className="mx-auto grid w-fit grid-cols-1 justify-items-center gap-4 py-20 md:grid-cols-2">
           <ExperienceDataCol
             label={numeral(commitsInfo.totalCount!).format("0,0")}
             desc={
@@ -192,7 +240,8 @@ const Home: NextPage<Props> = ({
       </ContentSection>
       {/* Contact */}
       <ContentSection
-        title="Interested in a passionate engineer?"
+        title="Let's chat"
+        subtitle="Interested in a driven engineer? Connect with me on LinkedIn and reach out."
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -231,12 +280,14 @@ export async function getStaticProps() {
   const commitsInfo = await getCommitsInfo();
   const repositoriesInfo = await getRepositoriesInfo();
   const postsInfo = await getPosts();
+  const aboutInfo = await getAboutMe();
 
   return {
     props: {
       commitsInfo: commitsInfo,
       repositoriesInfo: repositoriesInfo,
       recentPostsInfo: postsInfo,
+      aboutInfo: aboutInfo,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
