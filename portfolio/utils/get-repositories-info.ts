@@ -58,6 +58,7 @@ export default async function handler(): Promise<Data> {
       ["CSS", "HTML/CSS"],
       ["TypeScript", "TypeScript & JavaScript"],
       ["JavaScript", "TypeScript & JavaScript"],
+      ["Jupyter Notebook", "Python"]
     ]);
 
     user.repositories.nodes.forEach((node: any) => {
