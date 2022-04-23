@@ -263,7 +263,7 @@ const Home: NextPage<Props> = ({
         <div className="py-8 text-center">
           <a
             href={LINKEDIN_LINK}
-            className="rounded-lg bg-indigo-500 py-4 px-10 text-lg text-slate-50 shadow-lg shadow-indigo-500/50 transition-colors hover:bg-indigo-400 md:text-xl"
+            className="rounded-lg bg-indigo-500 py-4 px-10 text-lg text-slate-50 shadow-lg shadow-indigo-500/50 transition-colors hover:bg-indigo-600 md:text-xl"
           >
             Connect with me
           </a>

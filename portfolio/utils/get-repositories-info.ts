@@ -58,7 +58,6 @@ export default async function handler(): Promise<Data> {
       ["CSS", "HTML/CSS"],
       ["TypeScript", "TypeScript & JavaScript"],
       ["JavaScript", "TypeScript & JavaScript"],
-      ["Jupyter Notebook", "Python"]
     ]);
 
     user.repositories.nodes.forEach((node: any) => {
@@ -97,7 +96,7 @@ export default async function handler(): Promise<Data> {
     });
 
     // Massage data
-    const bannedLanguages = ["Swift", "C#", "TeX", "Shell"];
+    const bannedLanguages = ["Swift", "C#", "TeX", "Shell", "Jupyter Notebook"];
 
     let massagedPrimaryLanguages: Array<PrimaryLanguage> = [];
     primaryLanguages.forEach((l) => {
